@@ -50,7 +50,7 @@ ckeditor = CKEditor(app)
 Bootstrap5(app)
 
 # TODO: Configure Flask-Login
-
+ #TODO
 # CREATE DATABASE
 class Base(DeclarativeBase):
     pass
