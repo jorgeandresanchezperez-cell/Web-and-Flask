@@ -55,14 +55,10 @@ Bootstrap5(app)
 class Base(DeclarativeBase):
     pass
 
-database_url = os.getenv("DB_URL")
-
-if database_url:
-    # Render entrega postgres:// pero SQLAlchemy exige postgresql://
-    # database_url = database_url.replace("postgres://", "postgresql://")
-    app.config["SQLALCHEMY_DATABASE_URI"] = database_url
-else:
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///posts.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgresql_uetc_user:ByE1viCLuOUU30PVjK9wxOFEdxBr3QCL@dpg-d4u7gea4d50c73a7k0tg-a/postgresql_uetc"
+# Render usa postgresql:// pero SQLAlchemy necesita postgresql://
+if app.config['SQLALCHEMY_DATABASE_URI'].startswith('postgres://'):
+    app.config['SQLALCHEMY_DATABASE_URI'] = app.config['SQLALCHEMY_DATABASE_URI'].replace('postgres://', 'postgresql://', 1)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(model_class=Base)
